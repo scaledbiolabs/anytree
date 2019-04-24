@@ -2,11 +2,11 @@
 
 from .nodemixin import NodeMixin
 from .util import _repr
-
+import numpy as np
 
 class Node(NodeMixin, object):
 
-    def __init__(self, gate, name, index, parent=None, children=None, **kwargs):
+    def __init__(self, gate, name, index, parent=None, children=None,meta={}, **kwargs):
         u"""
         A simple tree node with a `name` and any `kwargs`.
 
@@ -65,7 +65,8 @@ class Node(NodeMixin, object):
         self.gate = gate
         self.name = name
         self.parent = parent
-        self.index = set(index)
+        self.meta = meta
+        self.index = np.array(index,dtype='int64')
         if children:
             self.children = children
 
